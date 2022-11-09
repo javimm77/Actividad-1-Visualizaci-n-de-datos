@@ -1,0 +1,125 @@
+<font face="Roboto">
+<h1>Criptomonedas y trading básico</h1>
+AUTOR: Javier Marcelo Mora
+<br>Url : <a href="https://js-g8zwfc.stackblitz.io">https://js-g8zwfc.stackblitz.io</a>
+<h2>Motivación</h2>
+El tema de esta actividad se ha elegido como parte de una somera introducción al estudio del tema del TFM que he elegido, “T-037.Aplicaciones de Big data en algorithmic trading”. La idea es enfocar el TFM al mundo de las criptomonedas, donde el trading algorítmico es aplicable de manera muy directa debido a la existencia de APIs de los distintos exchanges. Con esta actividad se pretende por tanto introducir algunos conceptos básicos de las criptomonedas y del trading.
+<br>
+<h2>Introducción</h2>
+Tras el lanzamiento en octubre de 2008 del paper “Bitcoin: A Peer-to-Peer Electronic Cash System” (  <a href="https://bitcoin.org/bitcoin.pdf">https://bitcoin.org/bitcoin.pdf</a> ) y la creación del blockchain de Bitcoin en enero de 2009, el crecimiento del uso de las criptomonedas y del blockchain ha llevado a la creación de un mercado totalmente nuevo; además de convertirse en un medio de pago en constante crecimiento, ha generado todo un mercado de oportunidades para los “traders” que han visto en la alta volatilidad del valor del Bitcoin un universo nuevo de posibilidades de inversión.<br>
+<br>
+En este documento se van a plantear unas sencillas estrategias de análisis técnico con unas métricas básicas para mostrar las posibilidades que ofrecen estas herramientas para el trading de Bitcoin y otras criptomonedas. Estas estrategias son conocidas ya en el mundo bursátil y son aplicables a acciones, monedas FIAT, futuros, etc.
+<br>
+<h2>Histórico de precios del Bitcoin</h1>
+Como primer punto a tener en cuenta en la inversión, es conocer la gráfica de las cotizaciones históricas. En la siguiente representación podemos comprobar los precios del BTC desde el comienzo de 2017 hasta la actualidad:
+<br>
+<br>
+<center>
+<!--<div style= "width:1000px" id="grafico1">-->
+<iframe title="Cotización Bitcoin (USD)" aria-label="Interactive line chart" id="datawrapper-chart-QzThW" src="https://datawrapper.dwcdn.net/QzThW/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="600" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();</script>
+<!--</div>-->
+<br>
+<br>
+</center>
+La gráfica muestra claramente el aumento exponencial en la cotización de la criptodivisa a lo largo de los últimos años. De valer décimas de céntimo de dólar en sus comienzos a llegar al máximo histórico de $66.000 en octubre de 2021.<br>
+<br>
+Este crecimiento exponencial sumado a la volatilidad de la cotización ha provocado grandes ganancias y a su vez grandes pérdidas a los inversores. Desde los crashes de junio de 2011 (-99%), agosto de 2012 (-56%), abril de 2013 (-83%), diciembre de 2013 (-50%), diciembre de 2017 a diciembre de 2018 (-84%), marzo de 2020 (-50%) y mayor de 2021 (-53%) hasta las subidas más importantes tales como el rally de 2017, el máximo histórico de 2021, etc.
+<br>
+<br>
+<h2>Volumen y transacciones de Bitcoin</h2>
+En este punto puede ser interesante pararse a analizar el volumen de las transacciones. Se han representado los datos por exchange, para poder hacernos una idea de qué volumen maneja cada uno de los principales proveedores de servicios cripto.<br>
+<br>
+<center>
+<!--<div style= "width:1000px" id="grafico2">-->
+<iframe title="Volumen de BTC" aria-label="Stacked Column Chart" id="datawrapper-chart-Z8iJT" src="https://datawrapper.dwcdn.net/Z8iJT/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="600" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();
+</script>
+<!--</div>-->
+<br>
+<br>
+</center>
+Se puede apreciar claramente el momento más crítico de la historia del bitcoin en cuanto a volumen en BTC se refiere; este momento coincide con el rally que lleva al máximo histórico de diciembre de 2017. Hay que tener cuidado con la interpretación de este gráfico. El eje vertical muestra el volumen en número de BTC completos cambiados. Debido al poco valor del BTC antes del rally de 2017 que llevó a la divisa a $20.000, las transacciones de grandes cantidades de BTC eran equivalentes en valor a las que se realizaron después, pero el volumen en BTC es mucho mayor. Como ejemplo ilustrativo, en lugar de realizar transacciones de 200 BTC a $100 lo que implica un volumen de 200 BTC, se pasó para la misma cantidad de USD a un volumen de 1 BTC a $20.000, lo que explica el volumen reflejado en la gráfica.<br>
+<br>
+El gráfico de sectores muestra más claramente la distribución total del período total acumulado reflejado arriba. Destacan tres exchanges principalmente: Coinbase, Bitfinex y Kraken. Esto resultará importante para la determinación del precio del Bitcoin y para la elección de la API que se realizará en el TFM. Se empleará la API de uno de los exchanges con más volumen.
+<center>
+<iframe width="1000" height="600" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQHN5k2UkGtiLj6Xo5N87oxx84BclkM9Bx6N1YcZ5W1yD05PGIjuLhkNodCpoP9XNUKhT2uD6-iS3LC/pubchart?oid=1202702382&format=interactive"></iframe>
+</center>
+<br>
+El siguiente gráfico muestra en USD el valor del volumen, lo que hace que tengamos una idea más precisa del valor del volumen en cada momento.<br>
+<br>
+<center>
+<!--<div style= "width:1000px" id="grafico3">-->
+<iframe title="Volúmen de BTC en USD" aria-label="Column Chart" id="datawrapper-chart-77GzU" src="https://datawrapper.dwcdn.net/77GzU/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="600" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();</script>
+<!--</div>-->
+</center>
+<br>
+<br>
+Se puede ver como no necesariamente coinciden los máximos históricos con los máximos de volumen. Esto nos da la pista de que el volumen no es un indicador directo de las subidas ó bajadas. Lo que realmente indica el volumen es la cantidad de valor que si intercambia, pero este intercambio puede estar equilibrado entre las compras y las ventas y no variar de precio. Sí que vemos que el máximo de 2017 coincidió con un pico de volimen, pero no así la bajada posterior que llevó al BTC a un precio alrededor de los $3000 sin un volumen fuerte.
+Finalmente mostraremos el gráfico de transacciones por minuto, representando el número de transacciones por exchange.<br>
+<br>
+<center>
+<iframe title="Transacciones de BTC por minuto" aria-label="Interactive area chart" id="datawrapper-chart-OymtA" src="https://datawrapper.dwcdn.net/OymtA/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="400" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();
+</script>
+</center>
+<br>
+Este gráfico presenta el mismo comportamiento que el del volumen de BTC. Se pasaron a realizar menos transacciones después del rally de 2017 por el mismo motivo antes comentado. Es interesante el importante aumento de transacciones en 2021 que llevó al máximo global coincidiendo con un pico en las transacciones. Se destaca el exchanve Coinbase como el líder en número de transacciones; en este aumento tiene relación directa la salida de Coinbase a bolsa el 14 de abril de 2021, momento en que se convierte en el exchange líder.
+<br>
+<h2>Indicadores básicos para trading</h2>
+Con la intención de detectar las mejores oportunidades de inversión, existen unas métricas que nos pueden dar una idea de cómo va a evolucionar el mercado en un futuro.<br>
+<br>
+<h3>Media móvil simple (SMA)</h3>
+La métrica más sencilla es la “Media móvil Simple” ó SMA en su acrónimo en inglés. Se calcula en un período de tiempo (50 días, 200 días, etc).<br>
+<br>
+En el siguiente gráfico de velas se muestra la SMA 200 para un período de tiempo de los últimos años del BTC:<br>
+<b>NOTA IMPORTANTE:</b> Se ha usado una versión de prueba de 60 días de Power Bi Pro que permite publicar en web; para poder visionar el gráfico, ES NECESARIO HACER SIGN IN CON UN USUARIO DE LA VIU; esto es debido a que como con la cuenta de VIU con la que tengo la prueba no puedo tener el papel de administrador, sólo puedo exportar el gráfico con lo opción de "Sitio web ó portal" que tiene limitada la forma en la que se crea la visualización embebida (no se puede quitar las pestaña de filtros, por ejemplo) y el acceso. Cuando finalice el período de 60 días (principios de enero de 2023) es probable que esta gráfica no se muestre. En caso de no verse ó no poder hacer sign in, el pdf subido en la entrega tiene el gráfico que se debería mostrar aquí.
+<br>
+<br>
+<center>
+<iframe title="Candlestick" width="1200" height="600" src="https://app.powerbi.com/reportEmbed?reportId=3a8a8832-1bbc-4f40-ad26-b9a15e09181a&autoAuth=true&ctid=02674ef9-5c2c-47d0-b2bc-595a784dda00" frameborder="0" allowFullScreen="true"></iframe>
+</center>
+<br>
+La SMA 200 sirve de varios propósitos; primeramente muestra la tendencia de un valor a largo plazo. Si la tendencia es positiva, la SMA 200 mostrará una pendiente positiva.<br>
+<br>
+Por otro lado, hace las veces “soporte”. Por norma general, sólo en un cambio de tendencia un valor atraviesa la SMA 200.
+<br>
+<br>
+Tal como se puede apreciar en la gráfica, vemos que se cumple la premisa de lo que implica la SMA 200: por ejemplo, de 2017 a 2018 tenemos un período de subida en la que la SMA 200 va subiendo, haciendo de soporte (los precios no bajan nunca de la línea de la SMA). Sin embargo, en 2018 tenemos un cruce entre las velas y la SMA lo que indica un cambio de tendencia. Durante 2018 y parte de 2019 la SMA 200 hace de "resistencia" y las velas nunca la traspasan hasta mediados de 2019 donde cambiamos de nuevo la tendencia.
+<br>
+<br>
+Lo mismo ocurre con el gran rally de 2020, donde se aprecia claramente que la SMA 200 hace de soporte hasta el máximo histórico de octubre de 2021.<br>
+<br>
+Como hemos podido comprobar, la SMA 200 es un indicador muy útil para conocer la tendencia a largo plazo de un valor.<br>
+<br>
+<h3>Media móvil exponencial (EMA)</h3>
+La media móvil exponencial es otra forma de calcular la media móvil. Al contrario que la SMA vista anteriormente, la EMA hace más hincapié en los datos más cercanos en el tiempo, por lo que es ideal para el análisis a corto plazo. Se suele decir que la EMA es una media "ponderada", por lo que podremos usarla para trading en períodos de tiempo más pequeños.<br>
+<br>
+Una técnica muy conocida de uso de EMA es el llamado "Cruce de Medias Móviles Exponenciales", que consiste en usar una EMA de un período largo y otra de un período más corto. En los puntos de cruce de ambas curvas, se producen los cambios de tendencia y pueden ser puntos idóneos para la realización de operaciones de compra ó venta.<br>
+<br>
+Vamos a ver en la siguiente gráfica en un período de tiempo corto, cómo funciona esta técnica. Para ello, calcularemos la EMA a 21 días y a 50 días, pintando todo el año 2021. Se eligió el año 2021 ya que nos encontramos tanto subidas como bajadas de cotización. El año 2022 no aporta un ejemplo muy gráfico ya que ha sido un año de bajadas generalizadas y no podremos apreciar los cruces de las EMA. En cuanto a la elección de los períodos de la EMA, 21 y 50 son dos valores razonables, pero pueden considerarse otros ya que lo principal es tener valores con períodos separados.
+
+<center>
+<iframe width="1000" height="600" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR36Tyv3niOnLZwfyND3TaGfCte2xa66pScyc7KWtAEsNfhE5noKcPW6bIKwLbqJq3AeCjyu4Hnsssc/pubchart?oid=1509979249&format=interactive"></iframe>
+</center>
+<br>
+<br>
+En la gráfica se puede comprobar que cuando la EMA 21 está por encima de la EMA 50, la tendencia de la cotización es alcista y vuando la EMA 50 está por encima de la EMA 21, la cotización baja.<br>
+Esto nos puede ser muy útil para poder aventurar compras y ventas de BTC. Por ejemplo, vemos que a principios de agosto se cruzan ambas EMA y la EMA 21 comienza a estar encima de la EMA 50. Sería un punto de posible compra. La cotización es ese momento es de $37000. Viendo las EMA, nos damos cuenta del cruce posterior de principios de octubre (realmente las dos EMA se "tocan" y no cambian tendencia, pero en ese momento no lo sabemos) y podríamos realizar una venta, con un valor de $45000. En este momento, como la EMA 21 vuelve a estar por encima, se podría comprar de nuevo. El siguiente cruce es a principios de diciembre, por lo que se podría vender con un valor de $58000. A partir de este momento sí que la EMA 50 está claramente por encima de la EMA 21, por lo que sabemos que la cotización tienda a la baja.<br>
+<br>
+<br>
+<h2>Conclusión</h2>
+<br>
+En este pequeño documento se ha realizado una pequeña introducción al Bitcoin desde el punto de vista del trading. Desde su cotización histórica (precio, volumen, transacciones), hasta unas rudimentarias herramientas de análisis técnico que nos pueden ser de gran utilidad para poder intentar predecir las tendencias de la cotización con la posibilidad que esto ofrece en cuanto al trading.<br>
+En el TFM se tratará la parte programática para poder realizar estas operaciones de manera automática mediante el uso de señales.
+<br>
+<br>
+<h2>Herramientas empleadas</h2>
+<br>
+Se han empleado diversas herramientas para la creación de esta actividad:<br>
+<br>- <b><a href="https://stackblitz.com/">Stackblitz.com</a>:</b> Servicio que permite crear una página web y hacer de host de la misma.<br>
+<br>
+- <b>Google Sheets:</b> Para la creación de alguna de las gráficas (gráfico de sectores y EMA) y para el tratamiento de los csv, cálculo de EMA y SMA.<br>
+<br>- <b><a href="https://www.datawrapper.de/">DataWrapper</a>:</b> Servicio para la creación de gráficos interactivos.<br>
+<br>
+- <b>Power BI:</b> Solución de Microsoft para Business Intelligence. Se ha empleado para el gráfico de velas.<br>
+<br>
+<br>
+<br>
